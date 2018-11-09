@@ -12,3 +12,9 @@ while i < 40 :
 		print("i is equals 50")
 else:
 	print("i wasn't equals 50")
+
+
+for i in "onetwothree":
+	if i == "e":
+		continue
+	print(i, end=' ')
