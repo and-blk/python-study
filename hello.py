@@ -1,20 +1,29 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.6
 
-equal = "="
-space = " "
-i = 0
-while i < 40 :
-	i = i + 1
-	print(space * (40 - i), equal * i, equal * i)
+def open_file(file_name):
+	f = open(file_name, "a")
+	f.write(string_for_file)
+	f.close()
 
-	if i == 50:
-		break
-		print("i is equals 50")
-else:
-	print("i wasn't equals 50")
+def reading_file(file_name):
+	f = open(file_name, "r")
+	for line in f:
+		print(line, end='')
+	f.close()
+
+print("put your filename here:")
+file_name = input()
+
+print("put your string for file here:")
+string_for_file = input() + "\n"
+
+open_file(file_name)
+reading_file(file_name)
 
 
-for i in "onetwothree":
-	if i == "e":
-		continue
-	print(i, end=' ')
+
+
+
+
+
+
