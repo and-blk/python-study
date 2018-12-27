@@ -2,7 +2,7 @@ import paramiko
 import os
 import logging
 import time
-import getpass
+
 
 
 class ConnectionToServer:
@@ -71,18 +71,16 @@ def is_it_alive(hostname, attempts=5, verbose=True):
             if verbose:
                 print("Number of attempt to connect is " + str(a))
             if a == attempts:
-                logger = logging.getLogger(__name__)
-                logfile = "/opt/python/studying/ssh_second/{}.log".format(__name__)
-                logger.setLevel(logging.INFO)
-                handler = logging.FileHandler(logfile)
-                logger.addHandler(handler)
-                logger.error(str(time.asctime()) + ": " + getpass.getuser() + ": " + " Host is in down state or there is a problem "
-                                                                       "with connection")
-                print()
                 return False
 
 
-
-
-
+def apps_logs(log_name='app_messages'):
+    logger = logging.getLogger(log_name)
+    logfile = "/opt/python/studying/ssh_second/{}.log".format(log_name)
+    logger.setLevel(logging.INFO)
+    handler = logging.FileHandler(logfile)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    return logger, logfile
 

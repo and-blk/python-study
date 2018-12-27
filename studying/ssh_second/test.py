@@ -1,5 +1,6 @@
 import connect_to
 import time
+import getpass
 
 host = "192.168.7.101"
 user = "user"
@@ -20,7 +21,10 @@ if connect_to.is_it_alive(host, 2):
     std_handler.stdout_handler('')
     time.sleep(10)
 else:
-    print("Host wasn't pinged successfully")
+    ex_text = "Host is in down state or there is a problem with connection"
+    logger, logfile = connect_to.apps_logs()
+    logger.warning(getpass.getuser() + " - " + ex_text)
+    print("Wasn't successfully, take a look at " + logfile)
     exit(555)
 
 while not state:
