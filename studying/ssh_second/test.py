@@ -1,17 +1,3 @@
-"""
-
-import os
-
-HOST = '192.168.7.101'
-
-if os.system('ping -c 1 ' + HOST + ' 2>&1 > /dev/null') == 0:
-    print('successfully connected')
-else:
-    print("something is going wrong")
-
-
-"""
-
 import connect_to
 import time
 
