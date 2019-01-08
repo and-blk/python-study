@@ -10,7 +10,7 @@ responce = str()
 state = False
 
 
-if connect_to.is_it_alive(host, 2):
+if connect_to.is_it_alive(host, 5):
     print('it is alive')
     h = connect_to.ConnectionToServer(host, user, password, port)
     channel = h.perform_tasks()
@@ -21,10 +21,7 @@ if connect_to.is_it_alive(host, 2):
     std_handler.stdout_handler('')
     time.sleep(10)
 else:
-    ex_text = "Host is in down state or there is a problem with connection"
-    logger, logfile = connect_to.apps_logs()
-    logger.warning(getpass.getuser() + " - " + ex_text)
-    print("Wasn't successfully, take a look at " + logfile)
+    print("Wasn't successfully, take a look at the log filel")
     exit(555)
 
 while not state:

@@ -1,7 +1,7 @@
 import paramiko
 import os
 import logging
-import time
+import getpass
 
 
 
@@ -41,7 +41,7 @@ class ConnectionToServer:
         if err:
             for i in err:
                 print(i)
-                return ['Error has been detected during the execution of this command']
+                return ['Error has been detected during the execution of this command'], stdout.readlines()
         else:
             return stdout.readlines()
 
@@ -63,6 +63,7 @@ class StdReader:
 
 def is_it_alive(hostname, attempts=5, verbose=True):
     a = 0
+    logger, logfile = apps_logs()
     while a <= attempts:
         if os.system('ping -c 1 ' + hostname + ' 2>&1 > /dev/null') is 0:
             return True
@@ -71,7 +72,11 @@ def is_it_alive(hostname, attempts=5, verbose=True):
             if verbose:
                 print("Number of attempt to connect is " + str(a))
             if a == attempts:
+                ex_text = "Host is in down state or there is a problem with connection"
+                logger.warning(getpass.getuser() + " - " + ex_text)
                 return False
+        text = 'Number of attempts: ' + str(a)
+        logger.info(getpass.getuser() + " - " + text)
 
 
 def apps_logs(log_name='app_messages'):
