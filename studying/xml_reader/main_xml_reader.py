@@ -23,7 +23,6 @@ with open('./out_xml.xml', 'wb') as xmlout:
         root = etree.Element(i)
         for book in list_data:
             element = etree.SubElement(root, 'book')
-            print(item.items())
             for key, value in book.items():
                 child = etree.SubElement(element, key)
                 child.text = value
