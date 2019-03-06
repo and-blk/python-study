@@ -18,9 +18,7 @@ for item in list_data:
     print('-----------------------')
 
 with open('./out_xml.xml', 'wb') as xmlout:
-    root_list = ['books', 'strings']
-    for i in root_list:
-        root = etree.Element(i)
+        root = etree.Element('books')
         for book in list_data:
             element = etree.SubElement(root, 'book')
             for key, value in book.items():
