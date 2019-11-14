@@ -1,10 +1,12 @@
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from webapp import app
 from webapp.form import LoginForm
+from webapp.getvers import GetVersion
 
 
 SQLALCHEMY_DATABASE_URI = app.config['SQLALCHEMY_DATABASE_URI']
 SQLALCHEMY_TRACK_MODIFICATIONS = app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
+hosts = ['localhost', 'localhost']
 
 
 
@@ -17,6 +19,14 @@ def home():
 @app.route('/about')
 def about():
     return render_template("about.html", title='about')
+
+
+@app.route('/today_kern', methods=['POST', 'GET'])
+def today_kern():
+    if request.method == 'POST':
+        data = GetVersion.remote_cmd()
+        return render_template('result.html', data=data)
+    return render_template("today_kern.html")
 
 
 @app.route('/login', methods=['POST', 'GET'])

@@ -29,3 +29,9 @@ class Post(db.Model):
 
     def __repr__(self):
         return 'Post {}'.format(self.body)
+
+
+class TodayKern(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    version = db.Column(db.String(100))
+    date = db.Column(db.DateTime, default=datetime.utcnow())
