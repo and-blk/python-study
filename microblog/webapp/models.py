@@ -31,7 +31,7 @@ class Post(db.Model):
         return 'Post {}'.format(self.body)
 
 
-class TodayKern(db.Model):
+class Kernel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     version = db.Column(db.String(100))
     date = db.Column(db.DateTime, default=datetime.utcnow())

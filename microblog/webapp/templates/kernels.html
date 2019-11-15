@@ -3,12 +3,13 @@
 {% block content %}
   <body>
   <p>Press to collect today's kernels versions</p>
-    <form action="/today_kern" method = "post">
+    <form action="/kernels" method = "post">
       <button name="submit" type="submit">Collect</button>
     </form>
+<hr>
 
 {% for i in data %}
-  {{ i }}
+  <p>{{ i }}</p>
 {% endfor %}
 
   </body>
