@@ -1,5 +1,6 @@
 import paramiko
-import sys
+from webapp import db
+from webapp.models import Kernel
 
 
 class DataProcessing:
@@ -12,20 +13,39 @@ class DataProcessing:
     to reach remote host and execute uname -r
     """
     @staticmethod
-    def remote_session(host, usr, pwd, list_data):
+    def remote_session(host, usr, pwd, ldata):
         try:
             client = paramiko.SSHClient()
             client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             client.connect(hostname=host, username=usr, password=pwd)
             stdin, stdout, stderr =  client.exec_command('uname -r')
             output = str(stdout.read(), encoding='utf-8')
-            list_data.append(output)
+            ldata.append(output)
+            return output
         except paramiko.AuthenticationException as auth_exception:
-            list_data.append(auth_exception)
+            ldata.append(auth_exception)
+            return auth_exception
         except Exception as exc:
-            list_data.append(exc)
+            ldata.append(exc)
+            return exc
         finally:
             client.close()
+
+    """
+    Commit to db instance imported from init
+    """
+    @staticmethod
+    def commit(host, vers):
+        kernel = Kernel(server_name=host, version=vers)
+        db.session.add(kernel)
+        db.session.commit()
+
+    @staticmethod ### method to read from db instance
+    def fetch():
+        return Kernel.query.all()
+
+
+
 
 
 

@@ -20,7 +20,6 @@ class User(db.Model):
         return check_password_hash(self.password_hash, password)
 
 
-
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(164))
@@ -28,10 +27,14 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return 'Post {}'.format(self.body)
+        return '<Post {}>'.format(self.body)
 
 
 class Kernel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     version = db.Column(db.String(100))
     date = db.Column(db.DateTime, default=datetime.utcnow())
+    server_name = db.Column(db.String(20))
+
+    def __repr__(self):
+        return '<Kernel {}>'.format(self.version)

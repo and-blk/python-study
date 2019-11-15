@@ -24,11 +24,12 @@ def about():
 
 @app.route('/kernels', methods=['POST', 'GET'])
 def kernels():
-    list_data = []
+    ldata = []
     if request.method == 'POST':
         for host in hosts:
-            DataProcessing.remote_session(host, usr, pwd, list_data)
-        return render_template('kernels.html', data=list_data)
+            vers = DataProcessing.remote_session(host, usr, pwd, ldata)
+            DataProcessing.commit(host=host, vers=vers)
+        return render_template('kernels.html', data=ldata)
     return render_template("kernels.html")
 
 
