@@ -7,6 +7,8 @@ from webapp.getvers import GetVersion
 SQLALCHEMY_DATABASE_URI = app.config['SQLALCHEMY_DATABASE_URI']
 SQLALCHEMY_TRACK_MODIFICATIONS = app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
 hosts = ['localhost', 'localhost']
+pwd = 'root'
+usr = 'root'
 
 
 
@@ -23,9 +25,11 @@ def about():
 
 @app.route('/today_kern', methods=['POST', 'GET'])
 def today_kern():
+    list_data = []
     if request.method == 'POST':
-        data = GetVersion.remote_cmd()
-        return render_template('result.html', data=data)
+        #data = GetVersion.remote_cmd(hosts, usr, pwd)
+        GetVersion.data_collection(hosts, usr, pwd, list_data)
+        return render_template('result.html', data=list_data)
     return render_template("today_kern.html")
 
 

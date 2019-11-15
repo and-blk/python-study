@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <body>
+  <p>Press to collect today's kernels versions</p>
+    <form action="/today_kern" method = "post">
+      <button name="submit" type="submit">Collect</button>
+    </form>
+
+{% for i in data %}
+  {{ i }}
+{% endfor %}
+
+  </body>
+
+{% endblock %}
