@@ -29,7 +29,7 @@ def kernels():
         for host in hosts:
             vers = DataProcessing.remote_session(host, usr, pwd, ldata)
             DataProcessing.commit(host=host, vers=vers)
-        return render_template('kernels.html', data=ldata)
+        return render_template('kernels.html', data=DataProcessing.fetch())
     return render_template("kernels.html")
 
 
