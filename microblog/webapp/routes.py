@@ -10,7 +10,7 @@ hosts = ['localhost', 'localhost', 'localhost']
 pwd = 'root'
 usr = 'root'
 
-
+#This is code for the index page
 @app.route('/')
 @app.route('/index')
 def home():
