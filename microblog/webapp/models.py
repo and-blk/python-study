@@ -38,3 +38,6 @@ class Kernel(db.Model):
 
     def __repr__(self):
         return '<Kernel {}>'.format(self.version)
+
+
+    "My comment from TEST branch"
